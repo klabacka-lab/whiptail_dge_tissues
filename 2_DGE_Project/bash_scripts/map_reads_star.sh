@@ -5,14 +5,6 @@
 WORKDIR="$1"
 
 ##########################
-# Load necessary modules #
-##########################
-
-module load gffread/0.12.7
-module load star/2.7.10a
-module load samtools/1.16
-
-##########################
 # Index reference genome #
 ##########################
 
@@ -25,14 +17,29 @@ echo ""
 ###################################
 
 # This can be passed over if the file is already a .gtf file.
+cd "$WORKDIR/references/AspMarm"
+gffread -T AspMarm.gff -o AspMarm.gtf
 
-gffread -T a_marmoratus_AspMarm2.0_v1.gff -o a_marmoratus_AspMarm2.0_v1.gtf
+cd "$WORKDIR/references/AspSept"
+gffread -T AspSept.gff3 -o AspSept.gtf
 
 ################
-# index genome #
+# index genomes #
 ################
 
-STAR --runThreadN 8 --runMode genomeGenerate --genomeDir "${w}"/Reference --genomeFastaFiles "${g}" --sjdbGTFfile "${w}"/Reference/a_marmoratus_AspMarm2.0_v1.gtf --sjdbOverhang 100
+STAR --runThreadN 8 \
+  --runMode genomeGenerate \
+  --genomeDir "$WORKDIR/references/AspMarm" \
+  --genomeFastaFiles "$WORKDIR/references/AspMarm/AspMarm.fasta" \
+  --sjdbGTFfile "$WORKDIR/references/AspMarm/AspMarm.gtf" \
+  --sjdbOverhang 100
+
+STAR --runThreadN 8 \
+  --runMode genomeGenerate \
+  --genomeDir "$WORKDIR/references/AspSept" \
+  --genomeFastaFiles "$WORKDIR/references/AspSept/AspSept.fasta" \
+  --sjdbGTFfile "$WORKDIR/references/AspSept/AspSept.gtf" \
+  --sjdbOverhang 100
 
 #############
 # map reads #
@@ -41,31 +48,48 @@ STAR --runThreadN 8 --runMode genomeGenerate --genomeDir "${w}"/Reference --geno
 # This creats .bam files for the merged and the unmerged reads, .sam files are not created. 
 # Our original samples were titled "Am_01_merged..."
 
-echo "Aligning Merged Reads against Reference with STAR, using $t threads."
+echo "Aligning Merged Reads against References with STAR"
 echo ""
 
-cd "${w}"/cleaned_reads/merged_reads
+cd "$WORKDIR/cleaned_reads/merged_reads"
 for merged_read in *.fastq.gz; do
-    sample_name=$(echo $merged_read | cut -d "_" -f "1,2" )
+  sample_name=$(echo $merged_read | cut -d "_" -f "1,2" )
 
 # map merged clean reads
-STAR --genomeDir "${w}"/Reference \
-      --runThreadN 8 \
-      --readFilesIn  "${w}"/cleaned_reads/merged_reads/$merged_read \
-      --readFilesCommand zcat \
-      --outSAMtype BAM SortedByCoordinate \
-      --quantMode GeneCounts \
-      --outFileNamePrefix "${w}"/mapped_reads/${sample_name}_merged_
+STAR --genomeDir "$WORKDIR/references/AspMarm" \
+  --runThreadN 8 \
+  --readFilesIn  "$WORKDIR/cleaned_reads/merged_reads/$merged_read" \
+  --readFilesCommand zcat \
+  --outSAMtype BAM SortedByCoordinate \
+  --quantMode GeneCounts \
+  --outFileNamePrefix "$WORKDIR/mapped_reads/${sample_name}_Marm_m"
+
+STAR --genomeDir "$WORKDIR/references/AspSept" \
+  --runThreadN 8 \
+  --readFilesIn  "$WORKDIR/cleaned_reads/merged_reads/$merged_read" \
+  --readFilesCommand zcat \
+  --outSAMtype BAM SortedByCoordinate \
+  --quantMode GeneCounts \
+  --outFileNamePrefix "$WORKDIR/mapped_reads/${sample_name}_Sept_m"
 
 # map unmerged clean reads
-STAR --genomeDir "${w}"/Reference \
-      --runThreadN 8 \
-      --readFilesIn  "${w}"/cleaned_reads/unmerged_reads/${sample_name}_unmerged1.fastq \
-                     "${w}"/cleaned_reads/unmerged_reads/${sample_name}_unmerged1.fastq \
-      --readFilesCommand zcat \
-      --outSAMtype BAM SortedByCoordinate \
-      --quantMode GeneCounts \
-      --outFileNamePrefix "${w}"/mapped_reads/${sample_name}_unmerged_
+STAR --genomeDir "$WORKDIR/references/AspMarm" \
+  --runThreadN 8 \
+  --readFilesIn  "$WORKDIR/cleaned_reads/unmerged_reads/${sample_name}_unmerged1.fastq" \
+  "$WORKDIR/cleaned_reads/unmerged_reads/${sample_name}_unmerged2.fastq" \
+  --readFilesCommand zcat \
+  --outSAMtype BAM SortedByCoordinate \
+  --quantMode GeneCounts \
+  --outFileNamePrefix "$WORKDIR/mapped_reads/${sample_name}_Marm_um"
+
+STAR --genomeDir "$WORKDIR/references/AspSept" \
+  --runThreadN 8 \
+  --readFilesIn  "$WORKDIR/cleaned_reads/unmerged_reads/${sample_name}_unmerged1.fastq" \
+  "$WORKDIR/cleaned_reads/unmerged_reads/${sample_name}_unmerged2.fastq" \
+  --readFilesCommand zcat \
+  --outSAMtype BAM SortedByCoordinate \
+  --quantMode GeneCounts \
+  --outFileNamePrefix "$WORKDIR/mapped_reads/${sample_name}_Sept_um"
 
 done
 
