@@ -8,6 +8,10 @@
 
 set -euo pipefail
 
+#load modules and activate required mamba environment
+module load miniforge3
+mamba activate dge_environment
+
 WORKDIR=""
 
 # Function to show usage information

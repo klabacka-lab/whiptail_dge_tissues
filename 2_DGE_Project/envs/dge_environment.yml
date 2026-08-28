@@ -1,0 +1,7 @@
+name: dge_environment
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - fastqc=0.11.4
+  - fastp=0.20.1

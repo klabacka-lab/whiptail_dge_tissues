@@ -18,23 +18,7 @@ echo ""
 #set working directory
 $WORKDIR="$1"
 
-
 begin=`date +%s` # record start time
-
-echo "copy over raw reads for this project"
-cd /scratch/general/nfs1/utu_4310/whiptail_shared_data/raw_rna_reads/01.RawData
-
-# Copy raw reads to the specified working directory. Our data was Am_01-15 and Am_25-27.
-# We had to do this step because we found it simpler to copy the information into the whiptail_dge_working_directory then to reference the path a vast number of times. This can be modified as needed.
-
-for i in {01..15}
-do
-	cp Am_$i/*.gz $d/raw_reads
-done
-for i in {25..27}
-do
-	cp Am_$i/*.gz $d/raw_reads
-done
 
 
 ###################################
