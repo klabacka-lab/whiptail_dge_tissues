@@ -43,7 +43,7 @@ bash environment_setup.sh "$WORKDIR"
 bash trim_rna_reads.sh "$WORKDIR"
 
 # Maps the reads to the reference genome
-
+bash map_reads_star.sh "$WORKDIR"
 
 # Next we had to merge unmerged and merged reads, because there is pair gaps
 cd $WORK_DIR/bash_scripts

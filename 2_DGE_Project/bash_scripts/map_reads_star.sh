@@ -1,23 +1,8 @@
 #!/bin/bash
 # This file maps the reads to the reference genome
 
-{
-usage="$(basename "$0") [-h][-g <reference_genome>][-w <working_directory>] [-t <number_of_processors>]"
-usage+="\nThis program will trim and map merged reads from given SRA sequences files to compare mapping of different NGS datasets."
-usage+="\n    -h  show this help text"
-usage+="\n    -w  Path to the working directory (where processed files will be stored)"
-usage+="\n    -t  Number of CPU processors"
-
-options=':h:g:t:w:'
-while getopts $options option; do
-  case "$option" in
-    h) echo "$usage"; exit;;
-    t) t=$OPTARG;;
-    w) w=$OPTARG;;
-    :) printf "missing argument for -%s\n" "$OPTARG" >&2; echo "$usage" >&2; exit 1;;
-    \?) printf "illegal option: -%s\n" "$OPTARG" >&2; echo "$usage" >&2; exit 1;;
-  esac
-done
+#set working directory
+WORKDIR="$1"
 
 ##########################
 # Load necessary modules #
@@ -33,8 +18,7 @@ module load samtools/1.16
 
 echo "Indexing Reference"
 echo ""
-cd "${w}"
-cd "${w}"/Reference
+
 
 ###################################
 # convert gff to gtf for indexing #
@@ -85,27 +69,5 @@ STAR --genomeDir "${w}"/Reference \
 
 done
 
-##################
-# Unload modules #
-##################
-
-module unload star/2.7.10a
-module unload samtools/1.16
-module unload gffread/0.12.7
 
 echo "Alignment completed successfully."
-
-##########################
-# Record execution stats #
-##########################
-
-end=$(date +%s)
-elapsed=$((end - begin))
-echo "Time taken: $elapsed"
-
-mdate=$(date +'%d/%m/%Y %H:%M:%S')
-mcpu=$((100-$(vmstat 1 2|tail -1|awk '{print $15}')))
-mmem=$(free | grep Mem | awk '{print $3/$2 * 100.0}')
-echo "$mdate | $mcpu | $mmem" >> ./stats-cpu
-} | tee logfile
-
