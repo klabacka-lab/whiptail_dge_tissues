@@ -1,52 +1,42 @@
 #!/bin/bash
 
-#SBATCH --account=utu_4310
-#SBATCH --partition=lonepeak
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=99:00:00
 #SBATCH -o slurm-%j.out-%N
 #SBATCH -e slurm-%j.err-%N
 
-# Default working directory
-WORK_DIR="."
+set -euo pipefail
+
+WORKDIR=""
 
 # Function to show usage information
 usage() {
-    echo "Usage: $0 [-d <directory>]"
-    echo "Options:"
-    echo "  -d <directory>: Set the working directory (default: current directory)"
+    echo "Usage: $0 -d <directory>"
+    echo "  -d <directory>: Set the working directory (required)"
     exit 1
 }
 
 # Parse command-line options
 while getopts "d:" opt; do
     case $opt in
-        d)
-            WORK_DIR=$OPTARG
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            usage
-            ;;
-        :)
-            echo "Option -$OPTARG requires an argument." >&2
-            usage
-            ;;
+        d) WORKDIR=$OPTARG ;;
+        \?) echo "Invalid option: -$OPTARG" >&2; usage ;;
+        :) echo "Option -$OPTARG requires an argument." >&2; usage ;;
     esac
 done
 
-# Shift the option index so that $1 now refers to the first non-option argument
-shift $((OPTIND - 1))
-
 # Set working directory
-cd "$WORK_DIR" || { echo "Error: Directory '$WORK_DIR' not found"; exit 1; }
+if [[ -z "$WORKDIR"]]; then
+    echo "Error: -d <directory> is required." >&2
+    usage
+fi
 
 # Sets up the file structure for mapping results
-bash environment_setup.sh
+bash environment_setup.sh "$WORKDIR"
 
 # Trims the reads and puts them in merged_reads
-bash $WORK_DIR/bash_scripts/new_trim_rna_reads -d /scratch/general/nfs1/utu_4310/whiptail_dge_working_directory
+bash trim_rna_reads.sh "$WORKDIR"
 
 # Maps the reads to the reference genome
 # Ask syrus for what he used for this step

@@ -15,20 +15,8 @@ echo ""
 echo "Beginning script"
 echo ""
 
-# Usage information for the script
-usage="$(basename "$0") [-h] [-d <working_directory>]
-Script to perform raw read preprocessing using fastp
-    -h show this help text
-    -d working directory"
-options=':h:l:d:'
-while getopts $options option; do
-    case "$option" in
-        h) echo "$usage"; exit;;    # Display usage information
-	d) d=$OPTARG;;              # Set working directory
-	:) printf "missing argument for -%s\n" "$OPTARG" >&2; echo "$usage" >&2; exit 1;;
-       \?) printf "illegal option: -%s\n" "$OPTARG" >&2; echo "$usage" >&2; exit 1;;
-     esac
-done
+#set working directory
+$WORKDIR="$1"
 
 
 begin=`date +%s` # record start time
