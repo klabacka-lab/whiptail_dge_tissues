@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#SBATCH --time=10:00:00   # walltime
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=48G   # memory per CPU core
+#SBATCH -J "index_refs"   # job name
 # Indexes the Reference files
 
 #set working directory
@@ -27,14 +32,14 @@ gffread -T AspSept.gff3 -o AspSept.gtf
 # index genomes #
 ################
 
-STAR --runThreadN 8 \
+STAR --runThreadN 16 \
   --runMode genomeGenerate \
   --genomeDir "$WORKDIR/references/AspMarm" \
   --genomeFastaFiles "$WORKDIR/references/AspMarm/AspMarm.fasta" \
   --sjdbGTFfile "$WORKDIR/references/AspMarm/AspMarm.gtf" \
   --sjdbOverhang 100
 
-STAR --runThreadN 8 \
+STAR --runThreadN 16 \
   --runMode genomeGenerate \
   --genomeDir "$WORKDIR/references/AspSept" \
   --genomeFastaFiles "$WORKDIR/references/AspSept/AspSept.fasta" \

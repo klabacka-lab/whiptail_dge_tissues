@@ -2,7 +2,7 @@
 
 #SBATCH --time=10:00:00   # walltime
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=16G   # memory per CPU core
+#SBATCH --mem=48G   # memory per CPU core
 #SBATCH -J "map_rna_tesselatus_unmerged"   # job name
 # This file maps the reads to the reference genome
 # map unmerged clean reads
