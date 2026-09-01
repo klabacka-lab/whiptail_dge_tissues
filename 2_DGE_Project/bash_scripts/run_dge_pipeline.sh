@@ -31,7 +31,7 @@ while getopts "d:" opt; do
 done
 
 # Set working directory
-if [[ -z "$WORKDIR"]]; then
+if [[ -z "$WORKDIR" ]]; then
     echo "Error: -d <directory> is required." >&2
     usage
 fi
@@ -64,6 +64,12 @@ S=$(ls "$WORKDIR/mapped_reads"/*_Marm_m*.bam | sed -E 's|.*/||; s/_Marm_m.*\.bam
 
 # Next we had to merge unmerged and merged reads, because there is pair gaps
 sbatch --wait --array=0-$((S-1))%10 merge_bams.sh "$WORKDIR"
+
+#C is the number of merged samples ready for classification by eagle-rc
+C=$(ls "$WORKDIR/mapped_reads"/*_Marm_combined.sorted.bam | sed -E 's|.*/||; s/_Marm_combined\.sorted\.bam$//' | sort -u | wc -l)
+
+#classify merged reads by parentage
+sbatch --wait --array=0-$((C-1))%10 sort_parentage.sh "$WORKDIR"
 
 # Next, we had to count the amount of reads at each location reads were mapped.
 # This referent file will likely vary project to project
