@@ -1,10 +1,11 @@
 #!/bin/bash
 
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --time=99:00:00
-#SBATCH -o slurm-%j.out-%N
-#SBATCH -e slurm-%j.err-%N
+#SBATCH --time=72:00:00   # walltime
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=32G   # memory per CPU core
+#SBATCH -J "run_dge_pipeline"   # job name
+#SBATCH -o logs/run_dge_pipeline.out
+#SBATCH -e logs/run_dge_pipeline.err
 
 set -euo pipefail
 

@@ -4,6 +4,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=16G   # memory per CPU core
 #SBATCH -J "merge_bams"   # job name
+#SBATCH -o logs/merge_bam.out
+#SBATCH -e logs/merge_bam.err
 
 set -euo pipefail
 

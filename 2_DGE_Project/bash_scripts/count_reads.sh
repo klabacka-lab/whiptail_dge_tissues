@@ -4,6 +4,8 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=16G   # memory per CPU core
 #SBATCH -J "count_reads"   # job name
+#SBATCH -o logs/count_reads.out
+#SBATCH -e logs/count_reads.err
 
 set -euo pipefail
 

@@ -4,6 +4,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=48G   # memory per CPU core
 #SBATCH -J "map_rna_tesselatus_unmerged"   # job name
+#SBATCH -o logs/map_unmerged.out
+#SBATCH -e logs/map_unmerged.err
 # This file maps the reads to the reference genome
 # map unmerged clean reads
 

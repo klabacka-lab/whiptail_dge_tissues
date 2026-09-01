@@ -4,6 +4,8 @@
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=16G   # memory per CPU core
 #SBATCH -J "sort_parentage"   # job name
+#SBATCH -o logs/sort_parentage.out
+#SBATCH -e logs/sort_parentage.err
 
 set -euo pipefail
 

@@ -4,6 +4,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=48G   # memory per CPU core
 #SBATCH -J "index_refs"   # job name
+#SBATCH -o logs/index_ref.out
+#SBATCH -e logs/index_ref.err
 # Indexes the Reference files
 
 set -euo pipefail

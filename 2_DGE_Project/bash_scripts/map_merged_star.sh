@@ -4,6 +4,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=48G   # memory per CPU core
 #SBATCH -J "map_rna_tesselatus"   # job name
+#SBATCH -o logs/map_merged.out
+#SBATCH -e logs/map_merged.err
 # This file maps the reads to the reference genome
 
 set -euo pipefail
