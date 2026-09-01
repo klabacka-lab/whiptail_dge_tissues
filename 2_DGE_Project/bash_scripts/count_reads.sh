@@ -1,17 +1,42 @@
 #!/bin/bash
 
-#subread is loaded to run 'featureCounts'
+#SBATCH --time=10:00:00   # walltime
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16G   # memory per CPU core
+#SBATCH -J "count_reads"   # job name
 
-module load subread
+set -euo pipefail
 
-# Define the path to the annotation file which is the [reference genome]
-reference_file="/scratch/general/nfs1/utu_4310/whiptail_dge_working_directory/Reference/a_marmoratus_AspMarm2.0_v1.gtf"
+module load miniforge3
+mamba activate dge_environment
+
+# Define file paths
+WORKDIR="$1"
+
+marm_gtf="$WORKDIR/references/AspMarm/AspMarm.gtf"
+sept_gtf="$WORKDIR/references/AspSept/AspSept.gtf"
+
+marm_dir="$WORKDIR/mapped_reads/classified/Marm"
+sept_dir="$WORKDIR/mapped_reads/classified/Sept"
+
+mkdir -p "$WORKDIR/analysis"
 
 #######################################################
-# Creating Counts [creating one file gene_counts.txt] #
+# Creating Counts from Marm-origin #
 #######################################################
 
-featureCounts -a $reference_file -o gene_counts.txt *.bam
+featureCounts \
+    -T 8 \
+    -a "$marm_gtf" \
+    -o "$WORKDIR/analysis/marm_counts.txt" \
+    "$marm_dir"/*.ref.bam
 
-module unload subread
+#######################################################
+# Creating Counts from Sept-origin #
+#######################################################
 
+featureCounts \
+    -T 8 \
+    -a "$sept_gtf" \
+    -o "$WORKDIR/analysis/sept_counts.txt" \
+    "$sept_dir"/*.ref.bam

@@ -5,6 +5,9 @@
 #SBATCH --mem=16G   # memory per CPU core
 #SBATCH -J "sort_parentage"   # job name
 
+set -euo pipefail
+
+
 module load miniforge3
 mamba activate dge_environment
 
@@ -18,6 +21,9 @@ EAGLE_RC="$PROJECT_ROOT/tools/eagle/eagle-rc"
 cd "$WORKDIR/mapped_reads"
 
 mkdir -p "$WORKDIR/mapped_reads/classified"
+
+mkdir -p "$WORKDIR/mapped_reads/classified/Marm"
+mkdir -p "$WORKDIR/mapped_reads/classified/Sept"
 
 #build sample list
 mapfile -t SAMPLES < <(ls *_Marm_combined.sorted.bam | sed -E 's/_Marm_combined\.sorted\.bam$//' | sort -u)
@@ -33,4 +39,12 @@ sample_name="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
     --bam2="${sample_name}_Sept_combined.sorted.bam" \
     > "$WORKDIR/mapped_reads/classified/${sample_name}_classified.1vs2.list"
 
-echo "EAGLE-RC classification completed for $sample_name"
+# Split the outputs into per-genome folders:
+# "1.*" files come from --bam1 (Marm), "2.*" files come from --bam2 (Sept)
+mv "$WORKDIR/mapped_reads/classified/${sample_name}_classified1."*.bam \
+   "$WORKDIR/mapped_reads/classified/Marm/"
+
+mv "$WORKDIR/mapped_reads/classified/${sample_name}_classified2."*.bam \
+   "$WORKDIR/mapped_reads/classified/Sept/"
+
+echo "EAGLE-RC classification complete for $sample_name"

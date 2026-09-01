@@ -6,6 +6,8 @@
 #SBATCH -J "map_rna_tesselatus"   # job name
 # This file maps the reads to the reference genome
 
+set -euo pipefail
+
 #set working directory
 WORKDIR="$1"
 

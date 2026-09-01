@@ -6,6 +6,8 @@
 #SBATCH -J "index_refs"   # job name
 # Indexes the Reference files
 
+set -euo pipefail
+
 #set working directory
 WORKDIR="$1"
 

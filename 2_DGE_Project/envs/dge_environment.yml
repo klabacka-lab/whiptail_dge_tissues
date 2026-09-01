@@ -8,3 +8,4 @@ dependencies:
   - gffread=0.12.7
   - star=2.7.10a
   - samtools=1.9
+  - subread=2.0.6

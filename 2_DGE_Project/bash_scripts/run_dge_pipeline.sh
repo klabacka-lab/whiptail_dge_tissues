@@ -72,8 +72,7 @@ C=$(ls "$WORKDIR/mapped_reads"/*_Marm_combined.sorted.bam | sed -E 's|.*/||; s/_
 sbatch --wait --array=0-$((C-1))%10 sort_parentage.sh "$WORKDIR"
 
 # Next, we had to count the amount of reads at each location reads were mapped.
-# This referent file will likely vary project to project
-bash count_reads.sh
+sbatch --wait count_reads.sh "$WORKDIR"
 
 #Lastly, Dr. Klabacka helped us with some different statistical analyses, then we used R to generate several graphs.
 # The R Script used can be found in the github repo, named "whiptail_dge_R_volcano_plot.r"

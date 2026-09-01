@@ -5,9 +5,8 @@
 #SBATCH --mem=16G   # memory per CPU core
 #SBATCH -J "merge_bams"   # job name
 
-##########################
-# load necessary modules #
-##########################
+set -euo pipefail
+
 WORKDIR="$1"
 
 module load miniforge3
