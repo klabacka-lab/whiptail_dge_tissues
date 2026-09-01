@@ -9,6 +9,9 @@
 #set working directory
 WORKDIR="$1"
 
+module load miniforge3
+mamba activate dge_environment
+
 ##########################
 # Index reference genome #
 ##########################

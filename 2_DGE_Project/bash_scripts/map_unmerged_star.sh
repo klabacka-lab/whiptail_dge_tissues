@@ -9,6 +9,9 @@
 
 WORKDIR="$1"
 
+module load miniforge3
+mamba activate dge_environment
+
 echo "Aligning unmerged reads against references with STAR"
 echo ""
 

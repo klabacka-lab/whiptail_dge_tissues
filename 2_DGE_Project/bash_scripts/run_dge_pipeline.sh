@@ -43,24 +43,27 @@ bash environment_setup.sh "$WORKDIR"
 bash trim_rna_reads.sh "$WORKDIR"
 
 #index the references
-bash index_refs.sh "$WORKDIR"
+sbatch --wait index_refs.sh "$WORKDIR"
 
 # M is the number of merged read files
 M=$(ls "$WORKDIR/cleaned_reads/merged_reads"/*.fastq.gz | wc -l)
 echo "Found $M merged reads"
 
 # Maps the merged reads to the reference genomes
-sbatch --wait --array=0-$((M-1)) map_merged_star.sh "$WORKDIR"
+sbatch --wait --array=0-$((M-1))%10 map_merged_star.sh "$WORKDIR"
 
 # U is the number of unmerged pairs of reads
 U=$(ls "$WORKDIR/cleaned_reads/unmerged_reads"/*_unmerged1.fastq | wc -l)
 echo "Found $U unmerged pairs"
 
 # Maps the unmerged pairs of reads to the reference genomes
-sbatch --wait --array=0-$((U-1)) map_unmerged_star.sh "$WORKDIR"
+sbatch --wait --array=0-$((U-1))%10 map_unmerged_star.sh "$WORKDIR"
+
+#S is the number of samples to merge
+S=$(ls "$WORKDIR/mapped_reads"/*_Marm_m*.bam | sed -E 's|.*/||; s/_Marm_m.*\.bam$//' | sort -u | wc -l)
 
 # Next we had to merge unmerged and merged reads, because there is pair gaps
-bash merge_merged_and_unmerged_merges.sh
+sbatch --wait --array=0-$((S-1))%10 merge_bams.sh "$WORKDIR"
 
 # Next, we had to count the amount of reads at each location reads were mapped.
 # This referent file will likely vary project to project
