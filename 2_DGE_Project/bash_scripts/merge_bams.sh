@@ -7,7 +7,6 @@
 #SBATCH -o logs/merge_bam.out
 #SBATCH -e logs/merge_bam.err
 
-set -euo pipefail
 
 WORKDIR="$1"
 

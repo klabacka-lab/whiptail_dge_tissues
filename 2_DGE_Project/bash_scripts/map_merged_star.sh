@@ -8,8 +8,6 @@
 #SBATCH -e logs/map_merged.err
 # This file maps the reads to the reference genome
 
-set -euo pipefail
-
 #set working directory
 WORKDIR="$1"
 

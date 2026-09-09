@@ -8,8 +8,6 @@
 #SBATCH -e logs/index_ref.err
 # Indexes the Reference files
 
-set -euo pipefail
-
 #set working directory
 WORKDIR="$1"
 

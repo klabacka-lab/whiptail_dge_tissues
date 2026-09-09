@@ -1,0 +1,34 @@
+Indexing Reference
+
+	STAR --runThreadN 16 --runMode genomeGenerate --genomeDir /home/vanwper/nobackup/autodelete/dge_tesselatus/references/AspMarm --genomeFastaFiles /home/vanwper/nobackup/autodelete/dge_tesselatus/references/AspMarm/AspMarm.fasta --sjdbGTFfile /home/vanwper/nobackup/autodelete/dge_tesselatus/references/AspMarm/AspMarm.gtf --sjdbOverhang 100
+	STAR version: 2.7.10a   compiled: 2022-01-14T18:50:00-05:00 :/home/dobin/data/STAR/STARcode/STAR.master/source
+Sep 04 10:42:57 ..... started STAR run
+Sep 04 10:42:57 ... starting to generate Genome files
+Sep 04 10:43:28 ..... processing annotations GTF
+Sep 04 10:43:42 ... starting to sort Suffix Array. This may take a long time...
+Sep 04 10:43:55 ... sorting Suffix Array chunks and saving them to disk...
+Sep 04 10:49:07 ... loading chunks from disk, packing SA...
+Sep 04 10:50:10 ... finished generating suffix array
+Sep 04 10:50:10 ... generating Suffix Array index
+Sep 04 10:53:16 ... completed Suffix Array index
+Sep 04 10:53:16 ..... inserting junctions into the genome indices
+Sep 04 10:55:22 ... writing Genome to disk ...
+Sep 04 10:55:26 ... writing Suffix Array to disk ...
+Sep 04 10:55:43 ... writing SAindex to disk
+Sep 04 10:55:46 ..... finished successfully
+	STAR --runThreadN 16 --runMode genomeGenerate --genomeDir /home/vanwper/nobackup/autodelete/dge_tesselatus/references/AspSept --genomeFastaFiles /home/vanwper/nobackup/autodelete/dge_tesselatus/references/AspSept/AspSept.fasta --sjdbGTFfile /home/vanwper/nobackup/autodelete/dge_tesselatus/references/AspSept/AspSept.gtf --sjdbOverhang 100
+	STAR version: 2.7.10a   compiled: 2022-01-14T18:50:00-05:00 :/home/dobin/data/STAR/STARcode/STAR.master/source
+Sep 04 10:55:46 ..... started STAR run
+Sep 04 10:55:46 ... starting to generate Genome files
+Sep 04 10:56:19 ..... processing annotations GTF
+Sep 04 10:56:32 ... starting to sort Suffix Array. This may take a long time...
+Sep 04 10:56:43 ... sorting Suffix Array chunks and saving them to disk...
+Sep 04 11:02:38 ... loading chunks from disk, packing SA...
+Sep 04 11:03:46 ... finished generating suffix array
+Sep 04 11:03:46 ... generating Suffix Array index
+Sep 04 11:07:12 ... completed Suffix Array index
+Sep 04 11:07:12 ..... inserting junctions into the genome indices
+Sep 04 11:09:44 ... writing Genome to disk ...
+Sep 04 11:09:46 ... writing Suffix Array to disk ...
+Sep 04 11:10:04 ... writing SAindex to disk
+Sep 04 11:10:07 ..... finished successfully

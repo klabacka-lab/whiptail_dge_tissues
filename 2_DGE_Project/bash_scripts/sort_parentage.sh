@@ -2,12 +2,11 @@
 
 #SBATCH --time=10:00:00   # walltime
 #SBATCH --cpus-per-task=2
-#SBATCH --mem=16G   # memory per CPU core
+#SBATCH --mem=64G   # memory per CPU core
 #SBATCH -J "sort_parentage"   # job name
 #SBATCH -o logs/sort_parentage.out
 #SBATCH -e logs/sort_parentage.err
 
-set -euo pipefail
 
 
 module load miniforge3
@@ -16,16 +15,13 @@ mamba activate dge_environment
 WORKDIR="$1"
 
 #find eagle-rc tool
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+PROJECT_ROOT="$(dirname "$SLURM_SUBMIT_DIR")"
 EAGLE_RC="$PROJECT_ROOT/tools/eagle/eagle-rc"
 
 cd "$WORKDIR/mapped_reads"
 
-mkdir -p "$WORKDIR/mapped_reads/classified"
-
-mkdir -p "$WORKDIR/mapped_reads/classified/Marm"
-mkdir -p "$WORKDIR/mapped_reads/classified/Sept"
+mkdir -p "$WORKDIR/haplotype/Marm"
+mkdir -p "$WORKDIR/haplotype/Sept"
 
 #build sample list
 mapfile -t SAMPLES < <(ls *_Marm_combined.sorted.bam | sed -E 's/_Marm_combined\.sorted\.bam$//' | sort -u)
@@ -39,7 +35,7 @@ sample_name="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
     --ref2="$WORKDIR/references/AspSept/AspSept.fasta" \
     --bam1="${sample_name}_Marm_combined.sorted.bam" \
     --bam2="${sample_name}_Sept_combined.sorted.bam" \
-    > "$WORKDIR/mapped_reads/classified/${sample_name}_classified.1vs2.list"
+    > "$WORKDIR/haplotype/${sample_name}_classified.1vs2.list"
 
 # Split the outputs into per-genome folders:
 # "1.*" files come from --bam1 (Marm), "2.*" files come from --bam2 (Sept)

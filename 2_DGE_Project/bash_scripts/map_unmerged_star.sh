@@ -9,7 +9,6 @@
 # This file maps the reads to the reference genome
 # map unmerged clean reads
 
-set -euo pipefail
 
 WORKDIR="$1"
 
