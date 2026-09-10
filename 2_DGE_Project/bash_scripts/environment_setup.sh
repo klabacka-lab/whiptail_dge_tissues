@@ -17,6 +17,6 @@ mv *.fq *.fq.gz raw_reads/
 mkdir -p cleaned_reads
 mkdir -p cleaned_reads/merged_reads
 mkdir -p cleaned_reads/unmerged_reads
-mkdir -p haplotypes
+mkdir -p haplotype
 mkdir -p mapped_reads
 mkdir -p variants

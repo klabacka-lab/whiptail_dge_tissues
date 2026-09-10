@@ -71,11 +71,11 @@ fi
 # echo "merging finished"
 
 #C is the number of merged samples ready for classification by eagle-rc
-C=$(ls "$WORKDIR/mapped_reads"/*_Marm_combined.sorted.bam | sed -E 's|.*/||; s/_Marm_combined\.sorted\.bam$//' | sort -u | wc -l)
+# C=$(ls "$WORKDIR/mapped_reads"/*_Marm_combined.sorted.bam | sed -E 's|.*/||; s/_Marm_combined\.sorted\.bam$//' | sort -u | wc -l)
 
-#classify merged reads by parentage
-sbatch --wait --array=0-$((C-1))%10 sort_parentage.sh "$WORKDIR"
-echo "classification complete"
+# #classify merged reads by parentage
+# sbatch --wait --array=0-$((C-1))%10 sort_parentage.sh "$WORKDIR"
+# echo "classification complete"
 
 MarmCount=$(ls "$WORKDIR"/haplotype/Marm/*_classified1.*.bam | wc -l)
 sbatch --wait --array=0-$((MarmCount-1))%10 remove_duplicates.sh "$WORKDIR/haplotype/Marm"

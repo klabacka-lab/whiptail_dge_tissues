@@ -40,9 +40,9 @@ sample_name="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
 # Split the outputs into per-genome folders:
 # "1.*" files come from --bam1 (Marm), "2.*" files come from --bam2 (Sept)
 mv "$WORKDIR/mapped_reads/classified/${sample_name}_classified1."*.bam \
-   "$WORKDIR/mapped_reads/classified/Marm/"
+   "$WORKDIR/haplotype/Marm/"
 
 mv "$WORKDIR/mapped_reads/classified/${sample_name}_classified2."*.bam \
-   "$WORKDIR/mapped_reads/classified/Sept/"
+   "$WORKDIR/haplotype/Sept/"
 
 echo "EAGLE-RC classification complete for $sample_name"
