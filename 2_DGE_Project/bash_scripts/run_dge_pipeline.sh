@@ -77,12 +77,20 @@ fi
 # sbatch --wait --array=0-$((C-1))%10 sort_parentage.sh "$WORKDIR"
 # echo "classification complete"
 
-MarmCount=$(ls "$WORKDIR"/haplotype/Marm/*_classified1.*.bam | wc -l)
-sbatch --wait --array=0-$((MarmCount-1))%10 remove_duplicates.sh "$WORKDIR/haplotype/Marm"
+#add read groups to the bam files for use in discarding duplicates
+# MarmCount=$(ls "$WORKDIR"/haplotype/Marm/*.ref.bam | wc -l)
+# sbatch --wait --array=0-$((MarmCount-1))%10 assign_read_groups.sh "$WORKDIR/haplotype/Marm"
 
-SeptCount=$(ls "$WORKDIR"/haplotype/Sept/*_classified2.*.bam | wc -l)
-sbatch --wait --array=0-$((SeptCount-1))%10 remove_duplicates.sh "$WORKDIR/haplotype/Sept"
-echo "Duplicates removed"
+# SeptCount=$(ls "$WORKDIR"/haplotype/Sept/*.ref.bam | wc -l)
+# sbatch --wait --array=0-$((SeptCount-1))%10 assign_read_groups.sh "$WORKDIR/haplotype/Sept"
+
+# #removing PCR duplicates
+# MarmCount=$(ls "$WORKDIR"/haplotype/Marm/rg_added/*.ref.rg.bam | wc -l)
+# sbatch --wait --array=0-$((MarmCount-1))%10 remove_duplicates.sh "$WORKDIR/haplotype/Marm"
+
+# SeptCount=$(ls "$WORKDIR"/haplotype/Sept/rg_added/*.ref.rg.bam | wc -l)
+# sbatch --wait --array=0-$((SeptCount-1))%10 remove_duplicates.sh "$WORKDIR/haplotype/Sept"
+# echo "Duplicates removed"
 
 # Next, we had to count the amount of reads at each location reads were mapped.
 sbatch --wait count_reads.sh "$WORKDIR"

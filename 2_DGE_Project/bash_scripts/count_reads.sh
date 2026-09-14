@@ -28,6 +28,7 @@ mkdir -p "$WORKDIR/analysis"
 
 featureCounts \
     -T 8 \
+    -p --countReadPairs \
     -a "$marm_gtf" \
     -o "$WORKDIR/analysis/marm_counts.txt" \
     "$marm_dir"/*.bam
@@ -38,6 +39,7 @@ featureCounts \
 
 featureCounts \
     -T 8 \
+    -p --countReadPairs \
     -a "$sept_gtf" \
     -o "$WORKDIR/analysis/sept_counts.txt" \
     "$sept_dir"/*.bam

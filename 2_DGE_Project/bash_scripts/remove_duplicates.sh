@@ -17,13 +17,13 @@ mkdir -p "$BAMS"/nodupes
 module load miniforge3
 mamba activate dge_environment
 
-mapfile -t BAM_LIST < <(ls "$BAMS"/*.ref.bam)
+mapfile -t BAM_LIST < <(ls "$BAMS"/rg_added/*.ref.rg.bam)
 
 bam="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
 sample_name=$(basename "$bam" | cut -d "_" -f "1,2" )
 
 picard MarkDuplicates \
-    REMOVE_DUPLICATES=true \
-    I="$bam" \
-    O="nodupes/${sample_name}.ref.nodupes.bam" \
-    M="nodupes/${sample_name}.ref.dup.metrics.txt" 
+    -REMOVE_DUPLICATES true \
+    -I "$bam" \
+    -O "nodupes/${sample_name}.ref.nodupes.bam" \
+    -M "nodupes/${sample_name}.ref.dup.metrics.txt" 
