@@ -1,6 +1,7 @@
 15 Sep 2026
     Perry and Randy met and discussed status of the project. Perry has re-ran all of the gene count scripts, and is now ready to do differential gene expression analyses. Looking at the sample information, I pointed out that I need to confirm whether "RLK063" was the individual actually used. However, it is certain that the locality for that individual is TX, Culberson.\
     For DEG analysis, we will perform two analysis types: (1) Comparing tissue types for ONLY Culberson, TX samples (2) Comparing populations for ONLY SM tissue.
+    We also talked about variant callers, and decided (based on results from several papers) that DeepVariant is the way to go (based on accuracy, recall, and runtime)
 
 26 Nov 2024
     Baylee and Randy realized that the csv called "combined_variants.csv" includes samples 16, 17, and 18 (which we were originally aiming to exclude, since they are from a different population). However, we came to the realization that it is fine to include all of the populations, given that we are calculating
