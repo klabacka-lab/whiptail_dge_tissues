@@ -1,0 +1,28 @@
+SampleID,SAMPLE,TISSUE,Location,County
+Am_01,RLK037,H,TX,Culberson
+Am_02,RLK037,L,TX,Culberson
+Am_03,RLK037,SM,TX,Culberson
+Am_04,RLK047,H,TX,Culberson
+Am_05,RLK047,L,TX,Culberson
+Am_06,RLK047,SM,TX,Culberson
+Am_07,RLK050,H,TX,Culberson
+Am_08,RLK050,L,TX,Culberson
+Am_09,RLK050,SM,TX,Culberson
+Am_10,RLK053,H,TX,Culberson
+Am_11,RLK053,L,TX,Culberson
+Am_12,RLK053,SM,TX,Culberson
+Am_13,RLK063,H,TX,Culberson
+Am_14,RLK063,L,TX,Culberson
+Am_15,RLK063,SM,TX,Culberson
+Am_16,RLK138,SM,NM,Santa Fe
+Am_17,RLK140,SM,NM,Santa Fe
+Am_18,RLK141,SM,NM,Santa Fe
+Am_19,RLK147,SM,NM,Santa Fe
+Am_20,RLK149,SM,NM,Santa Fe
+Am_21,RLK162,SM,TX,Brewster
+Am_22,RLK183,SM,TX,Brewster
+Am_23,RLK185,SM,TX,Brewster
+Am_24,RLK194,SM,TX,Brewster
+Am_25,RLK045,H,TX,Culberson
+Am_26,RLK045,L,TX,Culberson
+Am_27,RLK045,SM,TX,Culberson
