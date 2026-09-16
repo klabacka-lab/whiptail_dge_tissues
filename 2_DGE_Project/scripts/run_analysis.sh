@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --time=72:00:00   # walltime
-#SBATCH --cpus-per-task=16
+#SBATCH --time=48:00:00   # walltime
+#SBATCH --cpus-per-task=2
 #SBATCH --mem=32G   # memory per CPU core
 #SBATCH -J "run_dge_analysis"   # job name
 #SBATCH -o logs/run_analysis.out
@@ -14,4 +14,37 @@
 module load miniforge3
 mamba activate dge_r_analysis
 
-Rscript 
+
+#set working dir
+WORKDIR=""
+
+# Function to show usage information
+usage() {
+    echo "Usage: $0 -d <directory>"
+    echo "  -d <directory>: Set the working directory (required)"
+    exit 1
+}
+
+# Parse command-line options
+while getopts "d:" opt; do
+    case $opt in
+        d) WORKDIR=$OPTARG ;;
+        \?) echo "Invalid option: -$OPTARG" >&2; usage ;;
+        :) echo "Option -$OPTARG requires an argument." >&2; usage ;;
+    esac
+done
+
+# Set working directory
+if [[ -z "$WORKDIR" ]]; then
+    echo "Error: -d <directory> is required." >&2
+    usage
+fi
+
+
+#run a test on the localities, takes 3 arguments: featurecounts output, csv with sample data, and output path + name
+#run marm analysis
+Rscript localities_analysis.r "$WORKDIR/analysis/marm_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/marm_localities.csv"
+
+
+#run sept analysis
+Rscript localities_analysis.r "$WORKDIR/analysis/sept_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/sept_localities.csv"
