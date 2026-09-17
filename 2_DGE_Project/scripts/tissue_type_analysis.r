@@ -20,8 +20,8 @@ sample_data <- read.csv(sample_csv, stringsAsFactors = FALSE) |>
 
 #get just skeletal muscle data
 sm_info <- sample_data |>
-    filter(Tissue == "SM") |>
-    mutate(County = relevel(factor(County), ref = "Culberson")) |>
+    filter(County == "Culberson") |>
+    mutate(Tissue = relevel(factor(Tissue), ref = "SM")) |>
     arrange(match(SampleID, colnames(raw_counts)))
 
 count_matrix <- raw_counts |>
@@ -36,7 +36,7 @@ sm_info <- sm_info |>
 dds_sm <- DESeqDataSetFromMatrix(
     countData = count_matrix,
     colData = sm_info,
-    design = ~ County
+    design = ~ Tissue
 )
 dds_sm <- DESeq(dds_sm)
 

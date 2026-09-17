@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --time=48:00:00   # walltime
-#SBATCH --cpus-per-task=2
-#SBATCH --mem=32G   # memory per CPU core
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=16G   # memory per CPU core
 #SBATCH -J "run_dge_analysis"   # job name
 #SBATCH -o logs/run_analysis.out
 #SBATCH -e logs/run_analysis.err
@@ -43,8 +43,12 @@ fi
 
 #run a test on the localities, takes 3 arguments: featurecounts output, csv with sample data, and output path + name
 #run marm analysis
-Rscript localities_analysis.r "$WORKDIR/analysis/marm_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/marm_localities.csv"
+# Rscript localities_analysis.r "$WORKDIR/analysis/marm_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/marm_localities.csv"
+
+Rscript tissue_type_analysis.r "$WORKDIR/analysis/marm_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/marm_tissues.csv"
 
 
 #run sept analysis
-Rscript localities_analysis.r "$WORKDIR/analysis/sept_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/sept_localities.csv"
+# Rscript localities_analysis.r "$WORKDIR/analysis/sept_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/sept_localities.csv"
+
+Rscript tissue_type_analysis.r "$WORKDIR/analysis/sept_counts.txt" "$WORKDIR/analysis/SampleInfo.csv" "$WORKDIR/analysis/sept_tissues.csv"
