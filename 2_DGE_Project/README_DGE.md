@@ -1,10 +1,9 @@
 # whiptail_dge_tissues
 
-This is a project for the Advanced Bioinformatics course at Utah Tech University (BIOL 4310)
-## Differential Gene Expression for Heart, Lung, and Skeletal Muscle 2024
-Authors: Baylee Christensen, Syrus Miner, Seun Onileowo
+Project worked on between BIOL 4310 at Utah Tech University and Undergraduate Research at BYU
+## Differential Gene Expression across localities and tissue types
+Authors: Baylee Christensen, Syrus Miner, Seun Onileowo, Perry Van Wagoner
 
-Completed: April 2024
 ## Contents
 - [Documentation] (#documentation)
 - [Abstract] (#abstract)
@@ -14,31 +13,18 @@ Completed: April 2024
 ## Documentation
 ### Project Objectives
 
-1. Draft own Bioinformatic pipeline to understand differential gene expression
-    - Set up file structure
-    - Trim Raw Reads
-    - Map cleaned reads to reference genome
-    - Merge paired end reads and count to understand what is being expressed
+1. Bioinformatic pipeline to understand differential gene expression
+    - Set up file structure and EAGLE-RC
+    - Trim and clean Raw Reads
+    - Map cleaned reads to reference genomes
+    - Merge paired end reads
+    - Parental assignment (EAGLE-RC)
+    - Perform feature counts
     - Create plots to visualize data
-2. Present poster in front of an audience describing what we learned
-
 
 ### Languages Used
 
 Bash, R
-
-### Number of scripts
-
-Seven total scripts, including the batch script
-
-0. s.run.sh (runs all the other scripts except for the R plot)
-1. environment_setup.sh
-2. new_trim_rna_reads.sh
-3. map_reads_star.sh (preferred over map_reads_bwamem.sh)
-4. merge_merged_and_unmerged_merges.sh (or s.merge.sh)
-5. count_reads.sh
-6. whiptail_dge_R_volcano_plot.R
-
 
 ### External Tools/Packages Used
 1. fastp for trimming. We chose fastp for it's speed and it's accuracty in trimming. It also has an easy to understand user interface
@@ -48,28 +34,13 @@ Seven total scripts, including the batch script
 5. subread -> featureCounts, to count the number of reads referenced to the genome in defined locations
 6. ggplot2 (tidyverse), RColorBrewer, and ggrepel for creating plots in R
 
-### Purpose of each script
-
-0. s.run.sh (runs all the other scripts except for the R plot)
-1. environment_setup.sh - Sets up filesystem for user to organize cleaned reads, mapped reads, merged/unmerged reads
-2. new_trim_rna_reads.sh, trims the reads for quality
-3. map_reads_star.sh (preferred over map_reads_bwamem.sh), mapped reads to reference genome
-4. merge_merged_and_unmerged_merges.sh (or s.merge.sh), merges all reads, due to gaps that can be left over that occure through trimming
-5. count_reads.sh - counting the reads mapped to genome in distinct locations
-6. whiptail_dge_R_volcano_plot.R - to plot executed dataset
-
 ## Abstract
 Understanding gene expression across different tissue types is a crucial step to unravel underlying physiological functions between tissues. This research addresses the unique gene expression profiles of heart, skeletal muscle, and lung tissues by accessing RNA-Seq data from a cohort of individuals of the species Aspidoscelis tesselatus. This species is particularly interesting to study due to their asexuality, reproducing through parthenogenesis. We utilized advanced bioinformatics tools such as fastp for trimming to extract quality reads, STAR for read mapping to Aspidoscelis marmoratus, and featureCounts to count the number of RNA transcripts mapped. The results of this analysis can help us identify and compare differential gene patterns among these tissues.
 
 
-## Things to note and program requirements
-1. You must have access to the chpc supercomputer. Otherwise, you will have to manually install all of the python packages required to do the trimming.
-2. You must have access to the Utah Tech scratch directory. This will vary for each individual during each year. Our directory appears like the following for this dataprocess:
-```
-/scratch/general/nfs1/utu_4310/whiptail_dge_working_directory
-```
-3. There must be data in the directories you are working with. You will need a reference genome, which we gathered from Dr. Klabacka, and also the tissue data we are doing the actual analysis on.
-4. You must clone this GitHub repository, and instructions on how to do so are listed below
+## Things to note
+these scripts are designed for use with a cluster running SLURM.
+Attempts to use this scripts not on said cluster will require modification.
 
 # Instructions
 
@@ -89,15 +60,22 @@ Understanding gene expression across different tissue types is a crucial step to
    machine in the subdirectory with the same name as the repository. You now
    should navigate into this directory to use functions this repository has.
 
-### Step 2: Set working directory
-Where did you clone this github repository? That is now your working directory. From this working directory is where you will submit all of the functions required. The output files, AKA the RESULTS of these functions will be in:
-```
-/scratch/general/nfs1/utu_4310/whiptail_dge_working_directory
-```
+### Step 2: Set up EAGLE-RC
+This project requires the tool EAGLE-RC for use in parental assignment.
+1. on a login node (can be done on a compute node if it has internet access) run
+   the setup_eagle.sh script.
+2. Confirm installation by viewing the tools directory, it should now have
+   files for the tool EAGLE-RC
+
+### Step 3: Directory setup
+1. This project expects you to have your own directory containing all of your fastq files
+2. create directories with the following path for reference fastas fastq/references/fastaName/file.fasta
+4. This directory is what you will pass to the run_dge_pipeline.sh script with the option -d
+
 ### Step 3: Running the script
 1. The script that you should use to run the sbatch is as follows:
 ```
-sbatch s.run.sh -d /path/to/github/repository/clone/bash
+sbatch run_dge_pipeline.sh -d path/to/your/fastq/directory
 ```
 2. Ideally, this submits all of the jobs at once. It won't in this case, please view s.run.sh to see what line needs to be changed based off of your preferences.
 
