@@ -41,8 +41,20 @@ fi
 
 
 #merge ref and alt bams for each sample
-mamba activate samtools_env
-bash 00_merge_bams.sh $WORKDIR
-echo "Alt and Ref bams named and merged"
+# mamba activate samtools_env
+# bash 00_merge_bams.sh $WORKDIR
+# echo "Alt and Ref bams named and merged"
 
-#
+#call marm variants using deepvariant tool
+#number of marm bams to call variants on
+M=$(ls $WORKDIR/haplotype/Marm/mito_dge/*_marm_merged.bam | wc -l)
+
+sbatch --wait --array=0-$((M-1))%10 01_call_variants_marm.sh $WORKDIR
+echo "Completed variant calling for marm bams"
+
+#call sept variants using deepvariant
+#number of sept bams to call variants on
+S=$(ls $WORKDIR/haplotype/Sept/mito_dge/*_sept_merged.bam | wc -l)
+
+sbatch --wait --array=0-$((S-1))%10 01_call_variants_sept.sh $WORKDIR
+echo "Completed variant calling for sept bams"
