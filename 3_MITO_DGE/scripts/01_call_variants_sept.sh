@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#SBATCH --time=10:00:00   # walltime
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=48G   # memory per CPU core
+#SBATCH --time=18:00:00   # walltime
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=120G   # memory per CPU core
 #SBATCH -J "call_variants_sept"   # job name
-#SBATCH -o logs/call_variants_sept.out
-#SBATCH -e logs/call_variants_sept.err
+#SBATCH -o logs/call_variants_sept_%a.out
+#SBATCH -e logs/call_variants_sept_%a.err
 
 #load modules
 module load apptainer
@@ -14,7 +14,7 @@ module load apptainer
 WORKDIR=$1
 mkdir -p $WORKDIR/variants/sept
 
-mapfile -t BAMS < <(ls $WORKDIR/haplotype/Sept/mito_dge/*_sept_merged.bam)
+mapfile -t BAMS < <(ls $WORKDIR/haplotype/Sept/mito_dge/*_sept_dedup.bam)
 
 bam="${BAMS[$SLURM_ARRAY_TASK_ID]}"
 sample_name=$(basename "$bam" | cut -d "_" -f "1,2")
@@ -29,4 +29,4 @@ apptainer exec \
         --reads=$bam \
         --output_vcf=$WORKDIR/variants/sept/${sample_name}_sept.vcf.gz \
         --disable_small_model \
-        --num_shards=16
+        --num_shards=32
