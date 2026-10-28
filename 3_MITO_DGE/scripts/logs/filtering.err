@@ -1,0 +1,63 @@
+Warning: If your Wiggle data is a significant portion of available system memory, use the --max-mem and --sort-tmpdir options, or use --do-not-sort to disable post-conversion sorting. See --help for more information.
+tbx_index_build failed: /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/protein_sites.bed
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/merged_output.vcf.gz
+	--recode-INFO-all
+	--minGQ 20
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/filtered_HFStep1
+	--recode
+
+Using zlib version: 1.2.13
+After filtering, kept 27 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 5368685 out of a possible 5368685 Sites
+Run Time = 228.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/filtered_HFStep1.vcf
+	--recode-INFO-all
+	--minDP 10
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/filtered_HFStep2
+	--recode
+
+After filtering, kept 27 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 5368685 out of a possible 5368685 Sites
+Run Time = 220.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/filtered_HFStep3.vcf
+	--recode-INFO-all
+	--mac 2
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/filtered_HFStep4
+	--recode
+
+After filtering, kept 27 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 255593 out of a possible 4863843 Sites
+Run Time = 37.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/filtered_HFStep4.vcf
+	--recode-INFO-all
+	--max-missing 0.3
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/marm/filtered/filtered_HFStep5
+	--recode
+
+After filtering, kept 27 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 103259 out of a possible 255593 Sites
+Run Time = 7.00 seconds

@@ -4,8 +4,8 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G   # memory per CPU core
 #SBATCH -J "varmerging"   # job name
-#SBATCH -o varmerging.out
-#SBATCH -e varmerging.err
+#SBATCH -o logs/varmerging.out
+#SBATCH -e logs/varmerging.err
 
 
 
@@ -13,7 +13,7 @@
 # Date: 09/04/2024
 # Description: This script merges all vcf files from previous output (because we have multiple lizard vcf files) into one
 
-module miniforge3
+module load miniforge3
 mamba activate bcftools
 
 # Directory to search 
@@ -29,3 +29,5 @@ bcftools merge \
 
 #index new merged vcf
 bcftools index -t "$WORKDIR/merged_output.vcf.gz"
+
+rm vcf_list.txt

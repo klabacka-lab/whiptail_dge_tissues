@@ -1,0 +1,3 @@
+[submodule "3_MITO_DGE/3_MITO_DGE/MiCFiG"]
+	path = 3_MITO_DGE/MiCFiG
+	url = https://github.com/klabacka-lab/MiCFiG.git
