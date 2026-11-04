@@ -42,7 +42,7 @@ BEGIN { FS = "\t" }
             blast_id = id[1];  
         }
     }
-    print $1, $4, $5, blast_id;  # Add the extracted blast_id to the BED file
+    print $1, $4-1, $5, blast_id;  # Add the extracted blast_id to the BED file
 }' "$GFF" > "${BED}.temp"
 
 # Overwrite file with new data

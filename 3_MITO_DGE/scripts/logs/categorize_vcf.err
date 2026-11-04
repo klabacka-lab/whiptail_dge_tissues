@@ -1,0 +1,108 @@
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//protein_sites.vcf.gz
+	--keep SM_samples.txt
+	--recode-INFO-all
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//SM_protein
+	--recode
+
+Using zlib version: 1.2.13
+Keeping individuals in 'keep' list
+After filtering, kept 15 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 0 out of a possible 0 Sites
+File does not contain any sites
+Run Time = 0.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//protein_sites.vcf.gz
+	--keep L_samples.txt
+	--recode-INFO-all
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//L_protein
+	--recode
+
+Using zlib version: 1.2.13
+Keeping individuals in 'keep' list
+After filtering, kept 6 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 0 out of a possible 0 Sites
+File does not contain any sites
+Run Time = 0.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//protein_sites.vcf.gz
+	--keep H_samples.txt
+	--recode-INFO-all
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//H_protein
+	--recode
+
+Using zlib version: 1.2.13
+Keeping individuals in 'keep' list
+After filtering, kept 6 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 0 out of a possible 0 Sites
+File does not contain any sites
+Run Time = 0.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//protein_sites.vcf.gz
+	--keep culberson_samples.txt
+	--recode-INFO-all
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//culberson_protein
+	--recode
+
+Using zlib version: 1.2.13
+Keeping individuals in 'keep' list
+After filtering, kept 18 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 0 out of a possible 0 Sites
+File does not contain any sites
+Run Time = 0.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//protein_sites.vcf.gz
+	--keep SantaFe_samples.txt
+	--recode-INFO-all
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//SantaFe_protein
+	--recode
+
+Using zlib version: 1.2.13
+Keeping individuals in 'keep' list
+After filtering, kept 5 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 0 out of a possible 0 Sites
+File does not contain any sites
+Run Time = 0.00 seconds
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//protein_sites.vcf.gz
+	--keep brewster_samples.txt
+	--recode-INFO-all
+	--out /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered//brewster_protein
+	--recode
+
+Using zlib version: 1.2.13
+Keeping individuals in 'keep' list
+After filtering, kept 4 out of 27 Individuals
+Outputting VCF file...
+After filtering, kept 0 out of a possible 0 Sites
+File does not contain any sites
+Run Time = 0.00 seconds

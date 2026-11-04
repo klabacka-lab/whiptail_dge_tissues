@@ -14,8 +14,8 @@ WORKDIR=$1
 BED=$WORKDIR/protein_sites.bed
 VCF=$WORKDIR/filtered_HFStep5.vcf.gz
 
-bedtools intersect -a $VCF -b $BED -u -header > $WORKDIR/proteins_sites.vcf
+bedtools intersect -a $VCF -b $BED -u -header > $WORKDIR/protein_sites.vcf
 
-bgzip $WORKDIR/proteins_sites.vcf
+bgzip $WORKDIR/protein_sites.vcf
 
-tabix -p vcf $WORKDIR/proteins_sites.vcf.gz
+tabix -p vcf $WORKDIR/protein_sites.vcf.gz
