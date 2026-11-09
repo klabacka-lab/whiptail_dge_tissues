@@ -86,3 +86,7 @@ sbatch --wait 04_bed_filter.sh $WORKDIR/variants/sept/filtered/
 #make vcfs for each category of tissue type and county
 sbatch --wait 05_categorize_vcf.sh $WORKDIR/variants/marm/filtered/
 sbatch --wait 05_categorize_vcf.sh $WORKDIR/variants/sept/filtered/
+
+#extract per-individual SNP tables (CSV) from each categorized vcf
+sbatch --wait 06_snp_table.sh $WORKDIR/variants/marm/filtered/ marm
+sbatch --wait 06_snp_table.sh $WORKDIR/variants/sept/filtered/ sept

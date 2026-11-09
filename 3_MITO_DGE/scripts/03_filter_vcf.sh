@@ -24,32 +24,28 @@ OUTPUT=$4
 module load miniforge3
 mamba activate dge_environment
 
-# Use bedops to convert gff to bed
-gff2bed < "$GFF" > "$BED"
-
-# Retain gene attribute from the gff and add them to the bed file
-# 1. Split the 9th column by semicolon to extract attributes
-# 2. Extract pattern between '|' and '_'
-# 3. Add the extracted blast_id to the BED file
-
+# Build a BED of MiCFiG gene regions, labelled with the human MitoCarta gene
+# symbol (mito_carta_id=, added by MiCFiG's add_gene_name.sh). This works for
+# both references; blast_id= only exists in the AspMarm genome annotation.
+# Output: ${BED}.gz (sorted, bgzipped, tabix-indexed; 4th column = gene symbol)
 awk -v OFS='\t' '
 BEGIN { FS = "\t" }
-{
-    split($9, attributes, ";");  
-    for (i in attributes) {
-        if (attributes[i] ~ /blast_id=/) {
-            match(attributes[i], /sp\|[^|]+\|([^_]+)_/, id);  
-            blast_id = id[1];  
+!/^#/ && NF >= 9 {
+    gene = "NA"
+    n = split($9, attributes, ";")
+    for (i = 1; i <= n; i++) {
+        if (attributes[i] ~ /^mito_carta_id=/) {
+            gene = attributes[i]
+            sub(/^mito_carta_id=/, "", gene)
+            gsub(/"/, "", gene)
         }
     }
-    print $1, $4-1, $5, blast_id;  # Add the extracted blast_id to the BED file
-}' "$GFF" > "${BED}.temp"
-
-# Overwrite file with new data
-mv "${BED}.temp" "$BED"
+    print $1, $4-1, $5, gene
+}' "$GFF" | sort -k1,1 -k2,2n > "$BED"
 
 # Compress and index the final BED file
-tabix -p bed "${BED}"
+bgzip -f "$BED"
+tabix -f -p bed "${BED}.gz"
 
 
 # Step 1: Get rid of low-quality (mean) genotyping:
