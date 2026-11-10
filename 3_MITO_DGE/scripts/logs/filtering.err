@@ -1,5 +1,3 @@
-Warning: If your Wiggle data is a significant portion of available system memory, use the --max-mem and --sort-tmpdir options, or use --do-not-sort to disable post-conversion sorting. See --help for more information.
-tbx_index_build failed: /home/vanwper/nobackup/autodelete/dge_tesselatus//variants/sept/filtered/protein_sites.bed
 
 VCFtools - 0.1.16
 (C) Adam Auton and Anthony Marcketta 2009
@@ -30,7 +28,7 @@ Parameters as interpreted:
 After filtering, kept 27 out of 27 Individuals
 Outputting VCF file...
 After filtering, kept 5469916 out of a possible 5469916 Sites
-Run Time = 228.00 seconds
+Run Time = 229.00 seconds
 
 VCFtools - 0.1.16
 (C) Adam Auton and Anthony Marcketta 2009

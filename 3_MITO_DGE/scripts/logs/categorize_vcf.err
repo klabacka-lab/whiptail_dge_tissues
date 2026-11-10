@@ -13,8 +13,7 @@ Using zlib version: 1.2.13
 Keeping individuals in 'keep' list
 After filtering, kept 15 out of 27 Individuals
 Outputting VCF file...
-After filtering, kept 0 out of a possible 0 Sites
-File does not contain any sites
+After filtering, kept 6560 out of a possible 6560 Sites
 Run Time = 0.00 seconds
 
 VCFtools - 0.1.16
@@ -31,8 +30,7 @@ Using zlib version: 1.2.13
 Keeping individuals in 'keep' list
 After filtering, kept 6 out of 27 Individuals
 Outputting VCF file...
-After filtering, kept 0 out of a possible 0 Sites
-File does not contain any sites
+After filtering, kept 6560 out of a possible 6560 Sites
 Run Time = 0.00 seconds
 
 VCFtools - 0.1.16
@@ -49,9 +47,8 @@ Using zlib version: 1.2.13
 Keeping individuals in 'keep' list
 After filtering, kept 6 out of 27 Individuals
 Outputting VCF file...
-After filtering, kept 0 out of a possible 0 Sites
-File does not contain any sites
-Run Time = 0.00 seconds
+After filtering, kept 6560 out of a possible 6560 Sites
+Run Time = 1.00 seconds
 
 VCFtools - 0.1.16
 (C) Adam Auton and Anthony Marcketta 2009
@@ -67,8 +64,7 @@ Using zlib version: 1.2.13
 Keeping individuals in 'keep' list
 After filtering, kept 18 out of 27 Individuals
 Outputting VCF file...
-After filtering, kept 0 out of a possible 0 Sites
-File does not contain any sites
+After filtering, kept 6560 out of a possible 6560 Sites
 Run Time = 0.00 seconds
 
 VCFtools - 0.1.16
@@ -85,9 +81,8 @@ Using zlib version: 1.2.13
 Keeping individuals in 'keep' list
 After filtering, kept 5 out of 27 Individuals
 Outputting VCF file...
-After filtering, kept 0 out of a possible 0 Sites
-File does not contain any sites
-Run Time = 0.00 seconds
+After filtering, kept 6560 out of a possible 6560 Sites
+Run Time = 1.00 seconds
 
 VCFtools - 0.1.16
 (C) Adam Auton and Anthony Marcketta 2009
@@ -103,6 +98,5 @@ Using zlib version: 1.2.13
 Keeping individuals in 'keep' list
 After filtering, kept 4 out of 27 Individuals
 Outputting VCF file...
-After filtering, kept 0 out of a possible 0 Sites
-File does not contain any sites
+After filtering, kept 6560 out of a possible 6560 Sites
 Run Time = 0.00 seconds

@@ -90,3 +90,6 @@ sbatch --wait 05_categorize_vcf.sh $WORKDIR/variants/sept/filtered/
 #extract per-individual SNP tables (CSV) from each categorized vcf
 sbatch --wait 06_snp_table.sh $WORKDIR/variants/marm/filtered/ marm
 sbatch --wait 06_snp_table.sh $WORKDIR/variants/sept/filtered/ sept
+
+#merge all snp tables (marm + sept, all tissues/counties) into one csv
+sbatch --wait 07_merge_snp_tables.sh $WORKDIR
