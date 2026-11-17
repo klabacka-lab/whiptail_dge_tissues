@@ -5,3 +5,9 @@ deepvariant_1.10.0.sif
 # AI agent instructions (local only; global copy loaded via ~/.claude/CLAUDE.md)
 /CLAUDE.md
 /BYU_ORC_AGENTS.md
+
+# BioGRID access key (kept in ~/.config/biogrid/access_key)
+BioGrid_Interactions/biogrid_access.md
+
+# Python bytecode
+__pycache__/

@@ -93,3 +93,9 @@ sbatch --wait 06_snp_table.sh $WORKDIR/variants/sept/filtered/ sept
 
 #merge all snp tables (marm + sept, all tissues/counties) into one csv
 sbatch --wait 07_merge_snp_tables.sh $WORKDIR
+
+#BioGRID interactions:
+#step 08 needs internet, so it is NOT run here. Run it first on a login node:
+#    bash 08_biogrid_fetch.sh $WORKDIR      (see README_BIOGRID.md)
+#steps 09-10: filter to mito-nuclear interactions and annotate all SNPs
+sbatch --wait 09_10_annotate.sh $WORKDIR
