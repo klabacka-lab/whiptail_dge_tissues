@@ -2,7 +2,7 @@
 raw interactions: 847
   both partners mtDNA (dropped): 4
   neither partner mtDNA (dropped): 0
-mito-nuclear interactions kept: 843 (474 nuclear genes, 13 MT genes) -> /home/vanwper/nobackup/autodelete/dge_tesselatus/analysis/biogrid/mito_nuclear_interactions.csv
+mito-nuclear interactions kept: 843 (474 nuclear genes, 13 MT genes) -> /home/vanwper/nobackup/autodelete/dge_tesselatus/analysis/snp_tables/mito_nuclear_interactions.csv
 == step 10: annotate SNPs
 genes: 831  (ERR symbols: 0, with MT interaction: 112)
 genes by Interaction_Type: {'(none)': 621, 'P': 108, 'R': 85, 'D': 13, 'PR': 3, 'PD': 1}

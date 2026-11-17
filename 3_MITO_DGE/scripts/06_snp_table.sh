@@ -18,10 +18,12 @@
 # Coordinates are BED-style: START = POS-1, END = POS-1+len(REF).
 #
 # Columns: Tissue,County,IND_ID,REF_GENOME,CHROM,START,END,REF_ALLELE,ALT_ALLELE,
-#          GENE,Delta,FieldTag,GeneType,Official_Symbol,Interaction_Binary,
-#          Interaction_Gene,Interaction_Type
-#   GENE     = human MitoCarta symbol from INFO/GENE (set in 04_bed_filter.sh)
-#   Delta    = ref AD - alt AD for that individual
+#          GENE,REF_ALLELE_DEPTH,ALT_ALLELE_DEPTH,Delta,FieldTag,GeneType,
+#          Official_Symbol,Interaction_Binary,Interaction_Gene,Interaction_Type
+#   GENE             = human MitoCarta symbol from INFO/GENE (set in 04_bed_filter.sh)
+#   REF_ALLELE_DEPTH = reads supporting the ref allele for that individual (AD[0])
+#   ALT_ALLELE_DEPTH = reads supporting the alt allele for that individual (AD[1])
+#   Delta            = REF_ALLELE_DEPTH - ALT_ALLELE_DEPTH
 #   FieldTag = RLK### field ID from SampleInfo.csv
 #   GeneType .. Interaction_Type are left blank, to be filled by the BioGrid step.
 #
@@ -48,7 +50,7 @@ mamba activate bcftools
 OUTDIR=$WORKDIR/snp_tables
 mkdir -p "$OUTDIR"
 
-HEADER="Tissue,County,IND_ID,REF_GENOME,CHROM,START,END,REF_ALLELE,ALT_ALLELE,GENE,Delta,FieldTag,GeneType,Official_Symbol,Interaction_Binary,Interaction_Gene,Interaction_Type"
+HEADER="Tissue,County,IND_ID,REF_GENOME,CHROM,START,END,REF_ALLELE,ALT_ALLELE,GENE,REF_ALLELE_DEPTH,ALT_ALLELE_DEPTH,Delta,FieldTag,GeneType,Official_Symbol,Interaction_Binary,Interaction_Gene,Interaction_Type"
 
 for NAME in SM L H culberson SantaFe brewster; do
     VCF=$WORKDIR/${NAME}_protein.vcf.gz
@@ -82,12 +84,13 @@ for NAME in SM L H culberson SantaFe brewster; do
             c = (v[1] in county) ? county[v[1]] : "NA"
             ft = (v[1] in fieldtag) ? fieldtag[v[1]] : "NA"
             gene = (v[8] == "." || v[8] == "") ? "NA" : v[8]
-            if (split(v[7], ad, ",") == 2 && ad[1] != "." && ad[2] != ".")
-                delta = ad[1] - ad[2]
-            else
-                delta = "NA"
+            if (split(v[7], ad, ",") == 2 && ad[1] != "." && ad[2] != ".") {
+                ref_dp = ad[1]; alt_dp = ad[2]; delta = ad[1] - ad[2]
+            } else {
+                ref_dp = "NA"; alt_dp = "NA"; delta = "NA"
+            }
             # trailing empty fields: GeneType,Official_Symbol,Interaction_Binary,Interaction_Gene,Interaction_Type
-            print t, c, v[1], genome, v[2], v[3] - 1, v[3] - 1 + length(v[4]), v[4], v[5], gene, delta, ft, "", "", "", "", ""
+            print t, c, v[1], genome, v[2], v[3] - 1, v[3] - 1 + length(v[4]), v[4], v[5], gene, ref_dp, alt_dp, delta, ft, "", "", "", "", ""
         }
     ' "$SAMPLE_INFO" - > "$OUT"
 

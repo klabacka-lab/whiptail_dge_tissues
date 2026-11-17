@@ -59,7 +59,7 @@ whenever `all_mito_snps.csv` changes.
 | File | Made by | Contents |
 |---|---|---|
 | `$WORKDIR/analysis/biogrid/biogrid_raw_interactions.csv` | 08 | Raw BioGRID download (intermediate) |
-| `$WORKDIR/analysis/biogrid/mito_nuclear_interactions.csv` | 09 | One row per mito–nuclear interaction: `NUCLEAR_GENE, MT_GENE, INTERACTION_ID, EXPERIMENTAL_SYSTEM, THROUGHPUT, PUBMED_ID, PUBMED_AUTHOR, QUALIFICATIONS`. This is where to look up the evidence behind an interaction. |
+| `$WORKDIR/analysis/snp_tables/mito_nuclear_interactions.csv` | 09 | One row per mito–nuclear interaction: `NUCLEAR_GENE, MT_GENE, INTERACTION_ID, EXPERIMENTAL_SYSTEM, THROUGHPUT, PUBMED_ID, PUBMED_AUTHOR, QUALIFICATIONS`. This is where to look up the evidence behind an interaction. |
 | `$WORKDIR/analysis/snp_tables/all_mito_snps_annotated.csv` | 10 | Every SNP row with all columns filled |
 | `$WORKDIR/analysis/snp_tables/all_mito_snps_interacting.csv` | 10 | Only rows with a non-empty Interaction_Type |
 

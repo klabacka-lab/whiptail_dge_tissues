@@ -17,7 +17,7 @@
 #
 # Inputs:  $WORKDIR/analysis/biogrid/biogrid_raw_interactions.csv   (step 08)
 #          $WORKDIR/analysis/snp_tables/all_mito_snps.csv           (step 07)
-# Outputs: $WORKDIR/analysis/biogrid/mito_nuclear_interactions.csv
+# Outputs: $WORKDIR/analysis/snp_tables/mito_nuclear_interactions.csv
 #          $WORKDIR/analysis/snp_tables/all_mito_snps_annotated.csv
 #          $WORKDIR/analysis/snp_tables/all_mito_snps_interacting.csv
 #
@@ -33,7 +33,7 @@ if [[ -z "$WORKDIR" ]]; then
 fi
 
 RAW=$WORKDIR/analysis/biogrid/biogrid_raw_interactions.csv
-INTER=$WORKDIR/analysis/biogrid/mito_nuclear_interactions.csv
+INTER=$WORKDIR/analysis/snp_tables/mito_nuclear_interactions.csv
 SNPS=$WORKDIR/analysis/snp_tables/all_mito_snps.csv
 
 for f in "$RAW" "$SNPS" "$MITOCARTA"; do
